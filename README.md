@@ -6,6 +6,34 @@ Analysis pipeline for **"Does biome-specific surface energy partitioning propaga
 
 This paper tests whether the biome-specific surface forcing coefficient from [Shahid (2026)](https://github.com/R3GENESI5/biome-specific-forcing-coefficients) propagates to the top of atmosphere. We co-locate 314 FLUXNET flux tower sites with CERES EBAF Ed4.2 satellite observations and ERA5 reanalysis to measure the transfer coefficient.
 
+![Site Map](docs/fig1_site_map.png)
+
+## Pipeline
+
+```mermaid
+graph LR
+    A[FLUXNET<br/>314 sites<br/>H, LE, R_net] --> D[Surface alpha<br/>H/R_net]
+    B[CERES EBAF<br/>TOA radiation<br/>CRE] --> E[TOA CRE<br/>per site]
+    C[ERA5<br/>CAPE, TCWV<br/>BLH, Precip] --> F[Mediation<br/>variables]
+    
+    D --> G{Regression<br/>gamma}
+    E --> G
+    
+    G --> H[Transfer<br/>fraction<br/>6-10%]
+    G --> I[Seasonal<br/>JJA 14x DJF]
+    G --> J[Homogeneity<br/>R2=0.633]
+    
+    F --> K[Causal chain<br/>Precip mediates 54%]
+    
+    H --> L[Financial<br/>calibration<br/>$84/ha/yr]
+
+    style A fill:#1b7837,color:white
+    style B fill:#4575b4,color:white
+    style C fill:#dfc27d
+    style G fill:#d73027,color:white
+    style L fill:#35978f,color:white
+```
+
 ## Key Results
 
 - **314 flux tower sites** across 7 biomes, including BR-Sa1 (Santarem Km67), the most studied Amazon tower
