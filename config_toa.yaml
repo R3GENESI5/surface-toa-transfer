@@ -1,0 +1,52 @@
+# ──────────────────────────────────────────────
+# Paper D — Surface-to-TOA Transfer Configuration
+# ──────────────────────────────────────────────
+
+paths:
+  raw_data: "data/raw"
+  processed_data: "data/processed"
+  figures: "outputs/toa_figures"
+  tables: "outputs/toa_tables"
+
+# Reuse Paper A's FLUXNET and CERES settings
+fluxnet:
+  data_dir: "data/raw/fluxnet"
+  min_valid_months: 24
+
+ceres:
+  match_radius_deg: 0.5
+
+# Transfer coefficient settings
+transfer:
+  # Primary TOA variable for gamma estimation
+  primary_toa_variable: "ceres_toa_cre_net_mean"
+  # Alpha column from Paper A
+  alpha_column: "forcing_proxy"
+  # Bootstrap settings
+  n_bootstrap: 1000
+  bootstrap_ci: 0.95
+  # Cross-validation
+  cv_folds: 5
+  random_seed: 42
+  # Minimum sites per biome for biome-level gamma
+  min_sites_per_biome: 5
+
+# Homogeneity filter (MODIS land cover)
+homogeneity:
+  # Minimum fraction of CERES pixel that must be same IGBP class as tower
+  min_homogeneity: 0.70
+  # MODIS product for land cover
+  modis_product: "MCD12C1"
+
+# Financial sensitivity parameters
+financial:
+  scc: 200.0                    # $/tCO2e (US EPA upper estimate)
+  lambda_ipcc: 0.8              # C per W/m2 (IPCC AR6 central)
+  r_net_amazon: 130.0           # W/m2 mean net radiation
+  alpha_intact: 0.50            # alpha(beta) for intact tropical forest
+  alpha_degraded: 1.50          # alpha(beta) for degraded shrubland
+  dollars_per_wm2_per_ha: 11.76 # from Social Benefit methodology
+
+# Partial correlation controls
+controls:
+  - "latitude"

@@ -1,0 +1,42 @@
+# Data (too large for git, see README for download instructions)
+data/raw/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.eggs/
+*.egg-info/
+
+# Environment
+.env
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Credentials (NEVER commit)
+.cdsapirc
+.netrc
+
+# Node
+node_modules/
+package-lock.json
+package.json
+
+# Generated outputs (regenerate with pipeline)
+outputs/
+
+# Manuscript and figures (submitted via ESSOAr, not git)
+paper_d/manuscript/
+paper_d/figures/
+
+# Build scripts for manuscript
+rebuild_final.py
